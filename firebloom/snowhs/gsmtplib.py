@@ -12,6 +12,10 @@ Example
 ...            'This is a message sent by gsmtplib'))
 >>> s.quit()
 
+Misc
+------
+Author: snow@firebloom.cc
+License: BSD
 
 '''
 
@@ -29,11 +33,6 @@ class GSMTP(SMTP):
     ...            'Hello world!',
     ...            'This is a message sent by gsmtplib'))
     >>> s.quit()
-    
-    Misc
-    ------
-    Author: snow@firebloom.cc
-    License: BSD
     
     '''
     
