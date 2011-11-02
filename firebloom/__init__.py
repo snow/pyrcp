@@ -1,1 +1,0 @@
-'''We try to make the world better'''
