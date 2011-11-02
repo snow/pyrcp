@@ -1,14 +1,18 @@
 #! /usr/bin/python2.7
+# -*- coding: UTF-8 -*-
 
 '''Get a GMail SMTP connection
 
-Example:
+Example
+-------
 >>> from cc.firebloom.snowhs.gsmtplib import GSMTP
 >>> s = GSMTP('your_google_account', 'your_google_password')
 >>> s.sendmail('somebody@neverland.cc',
 ...            'Hello world!',
 ...            'This is a message sent by gsmtplib'))
 >>> s.quit()
+
+
 '''
 
 from smtplib import SMTP
@@ -17,13 +21,20 @@ from email.mime.text import MIMEText
 class GSMTP(SMTP):
     '''This class manages a connection to GMail SMTP server.    
     
-    Example:
+    Example
+    -------
     >>> from cc.firebloom.snowhs.gsmtplib import GSMTP
     >>> s = GSMTP('your_google_account', 'your_google_password')
     >>> s.sendmail('somebody@neverland.cc',
     ...            'Hello world!',
     ...            'This is a message sent by gsmtplib'))
     >>> s.quit()
+    
+    Misc
+    ------
+    Author: snow@firebloom.cc
+    License: BSD
+    
     '''
     
     account = ''
