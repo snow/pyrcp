@@ -12,15 +12,16 @@ Example
 ...            'This is a message sent by gsmtplib'))
 >>> s.quit()
 
-Misc
-------
-Author: snow@firebloom.cc
-License: BSD
-
 '''
 
 from smtplib import SMTP
 from email.mime.text import MIMEText
+
+__author__  = "Snow Hellsing <snow@firebloom.cc>"
+__status__  = "developing"
+__version__ = "0.0.1"
+
+__all__ = ['GSMTP']
 
 class GSMTP(SMTP):
     '''This class manages a connection to GMail SMTP server.
