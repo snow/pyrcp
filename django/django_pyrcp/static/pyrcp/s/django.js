@@ -23,7 +23,10 @@
         
         if('undefined' === typeof params.data){
             params.data = {}
+        } else if('string' === typeof params.data){
+            params.data = $.deparam(params.data);
         }
+        
         params.data.csrfmiddlewaretoken = pyrcp.get_csrf();
         
         return $.ajax(url, params);
