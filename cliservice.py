@@ -4,6 +4,7 @@ import signal
 import os
 import sys
 import traceback
+import argparse
 
 def _interrupt_handler(signum, frame):
     if signal.SIGINT == signum:
@@ -22,7 +23,7 @@ def _get_pid(pidfile):
         pid_file.close()
         return pid    
 
-class BaseCmdService(threading.Thread):
+class BaseCliService(threading.Thread):
     '''A framework for commandline service script
     
     extend this class and implement 'serve' method
@@ -129,6 +130,21 @@ class BaseCmdService(threading.Thread):
                     raise
         else:
             print '{} is not running'.format(cls.__name__)
+            
+    @classmethod
+    def do_cli(cls, pidfile):
+        parser = argparse.ArgumentParser(description='parse gerneral cli commands')
+        parser.add_argument('ACTION', default='start', nargs='?', 
+                            choices=('start', 'stop'))
+        parser.add_argument('-d', action='store_true', dest='DEBUG', 
+                            help='enable debug mode')
+        args = parser.parse_args()
+        
+        if 'start' == args.ACTION:
+            cls.start_(pidfile)
+            
+        elif 'stop' == args.ACTION:        
+            cls.stop_(pidfile)        
 
 #
 # example for script below
@@ -140,17 +156,5 @@ class BaseCmdService(threading.Thread):
 #        # some business logic
 #            
 #if '__main__' == __name__:
-#    parser = argparse.ArgumentParser(description='Example cmd service')
-#    parser.add_argument('ACTION', default='start', nargs='?', 
-#                        choices=('start', 'stop'))
-#    parser.add_argument('-d', action='store_true', dest='DEBUG', 
-#                        help='enable debug mode')
-#    args = parser.parse_args()
-#    
-#    pidfile = '{}.pid'.format(splitext(abspath(__file__))[0])
-#    
-#    if 'start' == args.ACTION:
-#        GrubService.start_(pidfile)
-#        
-#    elif 'stop' == args.ACTION:        
-#        GrubService.stop_(pidfile)
+#        pidfile = '{}.pid'.format(splitext(abspath(__file__))[0])
+#        GrubService.do_cli(pidfile)
